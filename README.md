@@ -2,6 +2,8 @@
 
 A premium financial planning application that combines advanced AI recommendations with sophisticated financial algorithms to help users optimize their portfolios and achieve their financial goals.
 
+## LINK - https://v0.app/chat/optifi-rO5HsmkOwGW
+
 ## Features
 
 ### Core Functionality
