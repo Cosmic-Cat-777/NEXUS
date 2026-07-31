@@ -4,6 +4,7 @@ import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { GuestBanner } from "@/components/guest-banner"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 import { useGuest } from "@/lib/guest-context"
 import { useAuth } from "@/lib/use-auth"
 import DashboardClient from "@/components/dashboard-client"
@@ -66,6 +67,7 @@ function DashboardContent() {
             </nav>
           </div>
           <div className="flex items-center gap-4">
+            <ThemeSwitcher />
             {isGuest ? (
               <>
                 <Link href="/sign-in" className="text-slate-300 hover:text-white transition">

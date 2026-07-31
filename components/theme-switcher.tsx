@@ -36,6 +36,8 @@ export function ThemeSwitcher() {
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
     applyTheme(newTheme)
+    // Emit storage event to trigger theme provider on other pages
+    window.dispatchEvent(new StorageEvent('storage', { key: 'theme', newValue: newTheme }))
   }
 
   if (!mounted) return null
