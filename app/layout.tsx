@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'OptiFi - AI-Powered Financial Planning',
+  description: 'Get personalized financial recommendations, analyze your portfolio, and plan for your future with OptiFi&apos;s AI-powered financial planning assistant.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -26,11 +26,12 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
+  colorScheme: 'dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
   ],
+  userScalable: true,
 }
 
 export default function RootLayout({
@@ -39,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className="bg-slate-900">
+      <body className="antialiased bg-slate-900">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
