@@ -269,7 +269,7 @@ export default function InsightsClient({ assets, goals, initialRecommendations, 
             </p>
             <div className="flex-1 h-12 flex items-end gap-1">
               {Array.from({ length: Math.min(assets.length, 8) }).map((_, i) => (
-                <div key={i} className="flex-1 h-8 bg-emerald-500/30 rounded-t"></div>
+                <div key={i} className="flex-1 h-8 bg-violet-600/30 rounded-t"></div>
               ))}
             </div>
           </div>

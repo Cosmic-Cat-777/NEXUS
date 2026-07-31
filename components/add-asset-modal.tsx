@@ -62,7 +62,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
               onChange={handleChange}
               required
               placeholder="e.g., Apple Stock"
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-violet-500"
             />
           </div>
 
@@ -72,7 +72,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-emerald-500"
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-violet-500"
             >
               <option value="stock">Stock</option>
               <option value="bond">Bond</option>
@@ -92,7 +92,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
               value={formData.symbol}
               onChange={handleChange}
               placeholder="e.g., AAPL"
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-violet-500"
             />
           </div>
 
@@ -107,7 +107,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
                 required
                 step="0.00000001"
                 placeholder="0.00"
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-violet-500"
               />
             </div>
 
@@ -121,7 +121,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
                 required
                 step="0.01"
                 placeholder="0.00"
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-violet-500"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function AddAssetModal({ onClose }: AddAssetModalProps) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 disabled:bg-slate-600 text-white rounded-lg transition font-medium"
+              className="flex-1 px-4 py-2 bg-violet-600 hover:bg-violet-700 disabled:bg-slate-600 text-white rounded-lg transition font-medium"
             >
               {loading ? 'Adding...' : 'Add Asset'}
             </button>

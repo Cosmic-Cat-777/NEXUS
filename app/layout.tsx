@@ -4,33 +4,20 @@ import './globals.css'
 import { GuestProvider } from '@/lib/guest-context'
 
 export const metadata: Metadata = {
-  title: 'OptiFi - AI-Powered Financial Planning',
-  description: 'Get personalized financial recommendations, analyze your portfolio, and plan for your future with OptiFi&apos;s AI-powered financial planning assistant.',
+  title: 'NEXUS - Where Every Financial Decision Connects',
+  description: 'Your AI Financial Command Center. Connect your goals, spending, savings, investments, and future plans into one intelligent platform with personalized AI insights.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/nexus-favicon.png',
+    apple: '/nexus-logo.png',
   },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
+  colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+    { media: '(prefers-color-scheme: light)', color: '#F8FAFC' },
+    { media: '(prefers-color-scheme: dark)', color: '#0B1020' },
   ],
   userScalable: true,
 }
@@ -41,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-slate-900">
-      <body className="antialiased bg-slate-900">
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased bg-white dark:bg-slate-950">
         <GuestProvider>
           {children}
           {process.env.NODE_ENV === 'production' && <Analytics />}

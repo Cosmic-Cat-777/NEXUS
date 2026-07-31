@@ -17,7 +17,7 @@ const featureMessages: Record<string, { title: string; description: string }> = 
   },
   sync: {
     title: 'Sign In to Sync Across Devices',
-    description: 'Keep your portfolio synchronized across all your devices. Access OptiFi on your phone, tablet, or desktop anytime.',
+    description: 'Keep your portfolio synchronized across all your devices. Access NEXUS on your phone, tablet, or desktop anytime.',
   },
   export: {
     title: 'Sign In to Export Reports',
@@ -67,26 +67,26 @@ export function AuthUpgradeModal({ isOpen, onClose, feature }: AuthUpgradeModalP
 
           {/* Benefits */}
           <div className="space-y-2 mb-6">
-            <h3 className="text-sm font-semibold text-slate-200 mb-3">With OptiFi Plus, you get:</h3>
+            <h3 className="text-sm font-semibold text-slate-200 mb-3">With NEXUS Plus, you get:</h3>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-violet-600 rounded-full" />
                 Secure portfolio storage
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-violet-600 rounded-full" />
                 Cross-device synchronization
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-violet-600 rounded-full" />
                 AI-powered recommendations
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-violet-600 rounded-full" />
                 Export and reporting tools
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-400">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-violet-600 rounded-full" />
                 Complete financial history
               </div>
             </div>
@@ -113,7 +113,7 @@ export function AuthUpgradeModal({ isOpen, onClose, feature }: AuthUpgradeModalP
         </div>
 
         {/* Footer */}
-        <div className="bg-slate-900/50 px-6 py-4 border-t border-slate-700">
+        <div className="bg-slate-950 dark:bg-slate-950/50 px-6 py-4 border-t border-slate-700">
           <button
             onClick={onClose}
             className="w-full text-slate-400 hover:text-slate-300 text-sm font-medium transition-colors"

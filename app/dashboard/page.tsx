@@ -18,7 +18,7 @@ function DashboardContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 dark:bg-slate-950 flex items-center justify-center">
         <div className="text-white">Loading...</div>
       </div>
     )
@@ -34,7 +34,7 @@ function DashboardContent() {
   const userName = user?.name || "Investor"
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-900">
+    <div className="flex flex-col min-h-screen bg-slate-950 dark:bg-slate-950">
       {isGuest && <GuestBanner />}
 
       {/* Header */}
@@ -42,10 +42,10 @@ function DashboardContent() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">OF</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">NX</span>
               </div>
-              <span className="font-bold text-xl text-white">OptiFi</span>
+              <span className="font-bold text-xl text-white">NEXUS</span>
             </Link>
             <nav className="hidden md:flex gap-6">
               <Link href="/dashboard?guest=true" className="text-emerald-400 font-medium">
@@ -71,7 +71,7 @@ function DashboardContent() {
                 <Link href="/sign-in" className="text-slate-300 hover:text-white transition">
                   Sign In
                 </Link>
-                <Link href="/sign-up" className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium">
+                <Link href="/sign-up" className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition font-medium">
                   Get Started
                 </Link>
               </>
@@ -89,7 +89,7 @@ function DashboardContent() {
         {/* Welcome Section */}
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-white mb-2">
-            {isGuest ? "Welcome to OptiFi" : `Welcome back, ${userName}`}
+            {isGuest ? "Welcome to NEXUS" : `Welcome back, ${userName}`}
           </h1>
           <p className="text-slate-400">
             {isGuest
@@ -138,7 +138,7 @@ export default function Page() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="min-h-screen bg-slate-950 dark:bg-slate-950 flex items-center justify-center">
           <div className="text-white">Loading...</div>
         </div>
       }

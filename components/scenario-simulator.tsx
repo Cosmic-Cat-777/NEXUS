@@ -203,7 +203,7 @@ export default function ScenarioSimulator({ assets }: any) {
       </div>
 
       {/* 5-Year Projection */}
-      <div className="p-8 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-emerald-500/30">
+      <div className="p-8 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-violet-500/30">
         <h2 className="text-2xl font-bold text-white mb-6">5-Year Projection</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

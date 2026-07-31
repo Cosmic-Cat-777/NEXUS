@@ -31,7 +31,7 @@ export default function PortfolioManagement({ assets }: any) {
         <h2 className="text-2xl font-bold text-white">Holdings</h2>
         <button
           onClick={() => setShowAddModal(true)}
-          className="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium"
+          className="px-6 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition font-medium"
         >
           Add Asset
         </button>
@@ -72,7 +72,7 @@ export default function PortfolioManagement({ assets }: any) {
                       <div className="flex items-center gap-2 justify-center">
                         <div className="w-16 h-2 bg-slate-700 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-emerald-500"
+                            className="h-full bg-violet-600"
                             style={{ width: `${alloc}%` }}
                           ></div>
                         </div>
@@ -99,7 +99,7 @@ export default function PortfolioManagement({ assets }: any) {
           <p className="text-slate-400 mb-6">No assets in your portfolio yet</p>
           <button
             onClick={() => setShowAddModal(true)}
-            className="inline-block px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium"
+            className="inline-block px-6 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition font-medium"
           >
             Add Your First Asset
           </button>

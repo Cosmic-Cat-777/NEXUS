@@ -17,7 +17,7 @@ function PortfolioContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 dark:bg-slate-950 flex items-center justify-center">
         <div className="text-white">Loading...</div>
       </div>
     )
@@ -27,7 +27,7 @@ function PortfolioContent() {
   const totalValue = assets.reduce((sum, asset) => sum + parseFloat(asset.totalValue || '0'), 0)
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-900">
+    <div className="flex flex-col min-h-screen bg-slate-950 dark:bg-slate-950">
       {isGuest && <GuestBanner />}
 
       {/* Header */}
@@ -35,10 +35,10 @@ function PortfolioContent() {
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">OF</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">NX</span>
               </div>
-              <span className="font-bold text-xl text-white">OptiFi</span>
+              <span className="font-bold text-xl text-white">NEXUS</span>
             </Link>
             <nav className="hidden md:flex gap-6">
               <Link href={isGuest ? '/dashboard?guest=true' : '/dashboard'} className="text-slate-300 hover:text-white transition">
@@ -108,7 +108,7 @@ export default function Page() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="min-h-screen bg-slate-950 dark:bg-slate-950 flex items-center justify-center">
           <div className="text-white">Loading...</div>
         </div>
       }

@@ -15,7 +15,7 @@ export function GuestBanner() {
         <div className="flex items-center gap-3">
           <AlertCircle className="w-4 h-4 text-amber-600" />
           <p className="text-sm text-amber-800 dark:text-amber-200">
-            You&apos;re exploring OptiFi in guest mode.{' '}
+            You&apos;re exploring NEXUS in guest mode.{' '}
             <Link href="/sign-in" className="font-semibold underline hover:opacity-80">
               Sign in
             </Link>{' '}
