@@ -187,15 +187,6 @@ export function GuestProvider({ children }: { children: ReactNode }) {
         clearGuestMode,
       }}
     >
-      {/* Store toggleGuestMode in window for auth flow */}
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            guestToggle: toggleGuestMode,
-          } as any)
-        }
-        return child
-      })}
       {children}
     </GuestContext.Provider>
   )
