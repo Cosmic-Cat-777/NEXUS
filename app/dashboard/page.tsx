@@ -34,11 +34,11 @@ function DashboardContent() {
   const userName = user?.name || "Investor"
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="flex flex-col min-h-screen bg-slate-900">
       {isGuest && <GuestBanner />}
 
       {/* Header */}
-      <header className={`border-b border-slate-700 bg-slate-800/50 sticky z-30 backdrop-blur ${isGuest ? "top-14" : "top-0"}`}>
+      <header className={`border-b border-slate-700 bg-slate-800/50 backdrop-blur`}>
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
@@ -85,7 +85,7 @@ function DashboardContent() {
       </header>
 
       {/* Main Content */}
-      <main className={`mx-auto max-w-7xl px-6 ${isGuest ? "py-8" : "py-12"}`}>
+      <main className={`flex-1 mx-auto max-w-7xl px-6 w-full ${isGuest ? "py-8" : "py-12"}`}>
         {/* Welcome Section */}
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-white mb-2">
