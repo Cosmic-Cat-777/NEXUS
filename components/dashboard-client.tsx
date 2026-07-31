@@ -5,9 +5,27 @@ import Link from 'next/link'
 import PortfolioChart from './portfolio-chart'
 import AddAssetModal from './add-asset-modal'
 import GoalsWidget from './goals-widget'
+import { AuthUpgradeModal } from './auth-upgrade-modal'
 
-export default function DashboardClient({ assets, goals }: any) {
+export default function DashboardClient({ assets, goals, isGuest }: any) {
   const [showAddAsset, setShowAddAsset] = useState(false)
+  const [showAuthUpgrade, setShowAuthUpgrade] = useState(false)
+  const [upgradeFeature, setUpgradeFeature] = useState<'save' | 'sync' | 'export' | 'profile' | 'history'>('save')
+
+  const handleProtectedAction = (feature: 'save' | 'sync' | 'export' | 'profile' | 'history') => {
+    if (isGuest) {
+      setUpgradeFeature(feature)
+      setShowAuthUpgrade(true)
+    }
+  }
+
+  const handleAddAsset = () => {
+    if (isGuest) {
+      handleProtectedAction('save')
+    } else {
+      setShowAddAsset(true)
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -44,10 +62,13 @@ export default function DashboardClient({ assets, goals }: any) {
 
           <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700">
             <p className="text-sm text-slate-400 mb-3">Quick Actions</p>
-            <button onClick={() => setShowAddAsset(true)} className="w-full px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium text-sm mb-2">
-              Add Asset
+            <button
+              onClick={handleAddAsset}
+              className="w-full px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium text-sm mb-2"
+            >
+              {isGuest ? 'Add Asset (Demo)' : 'Add Asset'}
             </button>
-            <Link href="/simulator" className="block w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-medium text-sm text-center">
+            <Link href={isGuest ? '/simulator?guest=true' : '/simulator'} className="block w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-medium text-sm text-center">
               What-If Analysis
             </Link>
           </div>
@@ -96,6 +117,13 @@ export default function DashboardClient({ assets, goals }: any) {
 
       {/* Add Asset Modal */}
       {showAddAsset && <AddAssetModal onClose={() => setShowAddAsset(false)} />}
+
+      {/* Auth Upgrade Modal */}
+      <AuthUpgradeModal
+        isOpen={showAuthUpgrade}
+        onClose={() => setShowAuthUpgrade(false)}
+        feature={upgradeFeature}
+      />
     </div>
   )
 }

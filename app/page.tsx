@@ -24,7 +24,10 @@ export default async function Page() {
             </div>
             <span className="font-bold text-xl text-white">OptiFi</span>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
+            <Link href="/dashboard?guest=true" className="px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition font-medium">
+              Continue as Guest
+            </Link>
             <Link href="/sign-in" className="text-slate-300 hover:text-white transition">
               Sign In
             </Link>
@@ -50,9 +53,9 @@ export default async function Page() {
             <Link href="/sign-up" className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold transition text-center">
               Start Free
             </Link>
-            <button className="px-8 py-4 border border-slate-600 hover:border-slate-400 text-white rounded-lg font-semibold transition">
-              Watch Demo
-            </button>
+            <Link href="/dashboard?guest=true" className="px-8 py-4 border border-slate-600 hover:border-slate-400 text-white rounded-lg font-semibold transition">
+              Try Demo
+            </Link>
           </div>
         </div>
 

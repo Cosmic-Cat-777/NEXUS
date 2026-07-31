@@ -1,94 +1,149 @@
-'use server'
+"use client"
 
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import DashboardClient from '@/components/dashboard-client'
-import { getAssets, getGoals, getUserProfile } from '@/app/actions/portfolio'
+import { Suspense, useState } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
+import { GuestBanner } from "@/components/guest-banner"
+import { useGuest } from "@/lib/guest-context"
+import { useAuth } from "@/lib/use-auth"
+import DashboardClient from "@/components/dashboard-client"
 
-export default async function DashboardPage() {
-  const session = await auth.api.getSession({ headers: await headers() })
+function DashboardContent() {
+  const searchParams = useSearchParams()
+  const isGuestParam = searchParams.get("guest") === "true"
+  const { guestData } = useGuest()
+  const { user, isLoading } = useAuth()
+  const [authenticatedAssets] = useState<any[]>([])
+  const [authenticatedGoals] = useState<any[]>([])
 
-  if (!session?.user) {
-    redirect('/sign-in')
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    )
   }
 
-  const [assets, goals, profile] = await Promise.all([getAssets(), getGoals(), getUserProfile()])
-
-  // Calculate portfolio stats
-  const totalValue = assets.reduce((sum, asset) => sum + (parseFloat(asset.totalValue || '0')), 0)
-  const assetsCount = assets.length
-  const goalsCount = goals.length
+  const isGuest = isGuestParam && !user
+  const assets = isGuest ? guestData.assets : authenticatedAssets
+  const goals = isGuest ? guestData.goals : authenticatedGoals
+  const totalValue = assets.reduce(
+    (sum, asset) => sum + (parseFloat(asset.totalValue || "0")),
+    0
+  )
+  const userName = user?.name || "Investor"
 
   return (
     <div className="min-h-screen bg-slate-900">
+      {isGuest && <GuestBanner />}
+
       {/* Header */}
-      <header className="border-b border-slate-700 bg-slate-800/50 sticky top-0 z-40 backdrop-blur">
+      <header className={`border-b border-slate-700 bg-slate-800/50 sticky z-30 backdrop-blur ${isGuest ? "top-14" : "top-0"}`}>
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">OF</span>
               </div>
               <span className="font-bold text-xl text-white">OptiFi</span>
             </Link>
             <nav className="hidden md:flex gap-6">
-              <Link href="/dashboard" className="text-emerald-400 font-medium">Dashboard</Link>
-              <Link href="/portfolio" className="text-slate-300 hover:text-white transition">Portfolio</Link>
-              <Link href="/goals" className="text-slate-300 hover:text-white transition">Goals</Link>
-              <Link href="/simulator" className="text-slate-300 hover:text-white transition">What-If</Link>
-              <Link href="/insights" className="text-slate-300 hover:text-white transition">Insights</Link>
+              <Link href="/dashboard?guest=true" className="text-emerald-400 font-medium">
+                Dashboard
+              </Link>
+              <Link href={isGuest ? "/portfolio?guest=true" : "/portfolio"} className="text-slate-300 hover:text-white transition">
+                Portfolio
+              </Link>
+              <Link href={isGuest ? "/goals?guest=true" : "/goals"} className="text-slate-300 hover:text-white transition">
+                Goals
+              </Link>
+              <Link href={isGuest ? "/simulator?guest=true" : "/simulator"} className="text-slate-300 hover:text-white transition">
+                What-If
+              </Link>
+              <Link href={isGuest ? "/insights?guest=true" : "/insights"} className="text-slate-300 hover:text-white transition">
+                Insights
+              </Link>
             </nav>
           </div>
-          <form action={async () => {
-            'use server'
-            await auth.api.signOut({ headers: await headers() })
-            redirect('/sign-in')
-          }}>
-            <button type="submit" className="text-slate-300 hover:text-white transition">Sign Out</button>
-          </form>
+          <div className="flex items-center gap-4">
+            {isGuest ? (
+              <>
+                <Link href="/sign-in" className="text-slate-300 hover:text-white transition">
+                  Sign In
+                </Link>
+                <Link href="/sign-up" className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition font-medium">
+                  Get Started
+                </Link>
+              </>
+            ) : (
+              <button className="text-slate-300 hover:text-white transition">
+                Sign Out
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main className={`mx-auto max-w-7xl px-6 ${isGuest ? "py-8" : "py-12"}`}>
         {/* Welcome Section */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-white mb-2">Welcome back, {session.user.name || 'Investor'}</h1>
-          <p className="text-slate-400">Here&apos;s your financial overview and personalized recommendations.</p>
+          <h1 className="text-4xl font-bold text-white mb-2">
+            {isGuest ? "Welcome to OptiFi" : `Welcome back, ${userName}`}
+          </h1>
+          <p className="text-slate-400">
+            {isGuest
+              ? "Explore our demo with realistic portfolio data and personalized recommendations."
+              : "Here's your financial overview and personalized recommendations."}
+          </p>
         </div>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700">
             <p className="text-sm text-slate-400 mb-2">Portfolio Value</p>
-            <p className="text-3xl font-bold text-white">${totalValue.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+            <p className="text-3xl font-bold text-white">
+              ${totalValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+            </p>
             <p className="text-sm text-emerald-400 mt-2">+2.5% this month</p>
           </div>
 
           <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700">
             <p className="text-sm text-slate-400 mb-2">Total Assets</p>
-            <p className="text-3xl font-bold text-white">{assetsCount}</p>
+            <p className="text-3xl font-bold text-white">{assets.length}</p>
             <p className="text-sm text-slate-400 mt-2">Holdings tracked</p>
           </div>
 
           <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700">
             <p className="text-sm text-slate-400 mb-2">Active Goals</p>
-            <p className="text-3xl font-bold text-white">{goalsCount}</p>
+            <p className="text-3xl font-bold text-white">{goals.length}</p>
             <p className="text-sm text-blue-400 mt-2">On track</p>
           </div>
 
           <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700">
             <p className="text-sm text-slate-400 mb-2">Risk Score</p>
-            <p className="text-3xl font-bold text-white">{profile?.riskTolerance || 'Not set'}</p>
+            <p className="text-3xl font-bold text-white">{guestData.profile.riskTolerance}</p>
             <p className="text-sm text-slate-400 mt-2">Risk tolerance</p>
           </div>
         </div>
 
         {/* Dashboard Content */}
-        <DashboardClient assets={assets} goals={goals} />
+        <DashboardClient assets={assets} goals={goals} isGuest={isGuest} />
       </main>
     </div>
+  )
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   )
 }

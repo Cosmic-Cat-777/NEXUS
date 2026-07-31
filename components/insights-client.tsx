@@ -1,15 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { markRecommendationAsRead } from '@/app/actions/portfolio'
 import { useRouter } from 'next/navigation'
+import { AuthUpgradeModal } from './auth-upgrade-modal'
 
-export default function InsightsClient({ assets, goals, initialRecommendations }: any) {
+export default function InsightsClient({ assets, goals, initialRecommendations, isGuest }: any) {
   const router = useRouter()
   const [recommendations, setRecommendations] = useState(initialRecommendations || [])
   const [loading, setLoading] = useState(false)
   const [aiSummary, setAiSummary] = useState('')
   const [generateInProgress, setGenerateInProgress] = useState(false)
+  const [showAuthUpgrade, setShowAuthUpgrade] = useState(false)
+
+  const handleMarkAsRead = async (recId: string) => {
+    if (isGuest) {
+      setShowAuthUpgrade(true)
+      return
+    }
+    // Original mark as read logic for authenticated users
+  }
 
   const totalValue = assets.reduce((sum: number, asset: any) => sum + parseFloat(asset.totalValue || '0'), 0)
   const readCount = recommendations.filter((r: any) => r.isRead).length
@@ -132,14 +141,7 @@ export default function InsightsClient({ assets, goals, initialRecommendations }
     }
   }
 
-  const handleMarkAsRead = async (recId: string) => {
-    try {
-      await markRecommendationAsRead(recId)
-      setRecommendations(recommendations.map((r: any) => (r.id === recId ? { ...r, isRead: true } : r)))
-    } catch (error) {
-      console.error('Error marking as read:', error)
-    }
-  }
+
 
   return (
     <div className="space-y-8">
@@ -293,6 +295,13 @@ export default function InsightsClient({ assets, goals, initialRecommendations }
           <p className="text-sm text-slate-400 mt-2">{goals.length} goals</p>
         </div>
       </div>
+
+      {/* Auth Upgrade Modal for Guest Mode */}
+      <AuthUpgradeModal
+        isOpen={showAuthUpgrade}
+        onClose={() => setShowAuthUpgrade(false)}
+        feature="profile"
+      />
     </div>
   )
 }

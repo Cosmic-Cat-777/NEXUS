@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { GuestProvider } from '@/lib/guest-context'
 
 export const metadata: Metadata = {
   title: 'OptiFi - AI-Powered Financial Planning',
@@ -42,8 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-slate-900">
       <body className="antialiased bg-slate-900">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <GuestProvider>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </GuestProvider>
       </body>
     </html>
   )
